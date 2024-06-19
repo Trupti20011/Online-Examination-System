@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exam</title>
+	<script>
+	        let timer;
+	        let timeLeft = 3600; // Example: 1 hour
+
+	        function startTimer() {
+	            timer = setInterval(function() {
+	                timeLeft--;
+	                document.getElementById("timer").innerHTML = Math.floor(timeLeft / 60) + ":" + (timeLeft % 60);
+	                if (timeLeft <= 0) {
+	                    clearInterval(timer);
+	                    document.getElementById("examForm").submit();
+	                }
+	            }, 1000);
+	        }
+
+	        window.onload = function() {
+	            startTimer();
+	        }
+	    </script>
+</head>
+<body>
+    <h1 th:text="${exam.title}">Exam Title</h1>
+    <form>
+        <div th:each="question : ${exam.questions}">
+            <p th:text="${question.content}"></p>
+            <input type="radio" th:value="${question.optionA}" th:name="${question.id}"> <span th:text="${question.optionA}"></span><br/>
+            <input type="radio" th:value="${question.optionB}" th:name="${question.id}"> <span th:text="${question.optionB}"></span><br/>
+            <input type="radio" th:value="${question.optionC}" th:name="${question.id}"> <span th:text="${question.optionC}"></span><br/>
+            <input type="radio" th:value="${question.optionD}" th:name="${question.id}"> <span th:text="${question.optionD}"></span><br/>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

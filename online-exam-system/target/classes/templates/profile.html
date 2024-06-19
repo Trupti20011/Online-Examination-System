@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <form th:action="@{/update-profile}" th:object="${user}" method="post">
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" /><br/>
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <h2>Change Password</h2>
+    <form th:action="@{/update-password}" method="post">
+        <label>New Password:</label>
+        <input type="password" name="password" /><br/>
+        <button type="submit">Change Password</button>
+    </form>
+</body>
+</html>
